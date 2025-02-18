@@ -1,0 +1,12 @@
+---
+- name: Install DHCPD
+  ansible.builtin.include_tasks: install-dhcpd-{{ ansible_os_family }}.yml
+
+- name: Copy DHCPD Configuration
+  ansible.builtin.template:
+    src: dhcpd.conf.j2
+    dest: /etc/dhcp/dhcpd.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify: Start DHCPD

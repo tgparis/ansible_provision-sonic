@@ -1,0 +1,7 @@
+---
+# Install DHCPD on Rocky
+- name: Install DHCPD on Rocky
+  ansible.builtin.dnf:
+    name: dhcp
+    state: present
+    update_cache: true

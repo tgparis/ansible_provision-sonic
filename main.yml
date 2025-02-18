@@ -1,0 +1,11 @@
+---
+# main.yml file for sonic_provisioning playbook
+- name: Configure Sonic provisioning server
+  hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: yes
+  roles:
+    - httpd
+    - dhcpd
+    - configs

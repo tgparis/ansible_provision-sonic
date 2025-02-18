@@ -1,0 +1,37 @@
+---
+switch_list:
+  - name: mie-phxdc-ss01
+    mac_address: "00:11:22:33:44:55"
+    lo0_ip_address: "10.127.0.1"
+    eth0_ip_address: "192.168.160.10"
+    host_name: "mie-phxdc-ss01"
+    asn: "65000"
+
+  - name: mie-phxdc-ss02
+    mac_address: "00:11:22:33:44:66"
+    lo0_ip_address: "10.127.0.2"
+    eth0_ip_address: "192.168.160.11"
+    host_name: "mie-phxdc-ss02"
+    asn: "65000"
+
+  - name: mie-phxdc-ls301
+    mac_address: "00:11:22:33:44:77"
+    lo0_ip_address: "10.127.0.10"
+    eth0_ip_address: "192.168.160.12"
+    host_name: "mie-phxdc-ls301"
+    asn: "65001"
+
+  - name: mie-phxdc-ls302
+    mac_address: "00:11:22:33:44:88"
+    lo0_ip_address: "10.127.0.11"
+    eth0_ip_address: "192.168.160.13"
+    host_name: "mie-phxdc-ls302"
+    asn: "65001"
+
+# General DHCP Configuration
+oob_net: "192.168.160.0"
+oob_netmask: "255.255.255.0"
+oob_net_range: "192.168.160.10 192.168.160.30"
+oob_gateway: "192.168.160.1"
+oob_dns: "8.8.8.8"
+server_ip: "192.168.160.9"

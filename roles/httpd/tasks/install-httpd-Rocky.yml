@@ -1,0 +1,7 @@
+---
+#Install HTTPD on Rocky
+- name: Install HTTPD on Rocky
+  ansible.builtin.dnf:
+    name: httpd
+    state: present
+    update_cache: true

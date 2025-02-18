@@ -1,0 +1,34 @@
+---
+- name: Enable DHCPD
+  ansible.builtin.systemd:
+    name: dhcpd
+    enabled: yes
+    state: started
+
+- name: Enable HTTPD
+  ansible.builtin.systemd:
+    name: httpd
+    enabled: yes
+    state: started
+
+- name: Start DHCPD
+  ansible.builtin.systemd:
+    name: dhcpd
+    state: started
+    enabled: yes
+
+- name: Start HTTPD
+  ansible.builtin.systemd:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Restart DHCPD
+  ansible.builtin.systemd:
+    name: dhcpd
+    state: restarted
+
+- name: Restart HTTPD
+  ansible.builtin.systemd:
+    name: httpd
+    state: restarted

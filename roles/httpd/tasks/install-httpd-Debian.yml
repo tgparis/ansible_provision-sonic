@@ -1,0 +1,13 @@
+---
+# Install HTTPD on Debian
+- name: Install HTTPD on Debian
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+    update_cache: true
+
+- name: Start Apache 
+  ansible.builtin.systemd:
+    name: apache2
+    state: started
+    enabled: yes

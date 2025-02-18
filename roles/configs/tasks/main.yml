@@ -1,0 +1,69 @@
+---
+# Copy Sonic image
+- name: Copy Sonic image
+  ansible.builtin.copy:
+    src: sonic-broadcom.bin
+    dest: /var/www/html/sonic-broadcom.bin
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Create symlink onie-installer
+  ansible.builtin.file:
+    src: /var/www/html/sonic-broadcom.bin
+    dest: /var/www/html/onie-installer
+    state: link
+
+- name: Copy initial.json 
+  ansible.builtin.template:
+    src: initial.json.j2
+    dest: /var/www/html/initial.json
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Copy config_db.json files based on switch_list 
+  ansible.builtin.template:
+    src: config_db.json.j2
+    dest: "/var/www/html/{{ switch.name }}_config_db.json"
+    owner: root
+    group: root
+    mode: '0644'
+  loop: "{{ switch_list }}"
+  loop_control:
+    loop_var: switch
+
+- name: Copy post_install.sh script based on switch_list
+  ansible.builtin.template:
+    src: post_install.sh.j2
+    dest: "/var/www/html/{{ switch.name }}_post_install.sh"
+    owner: root
+    group: root
+    mode: '0755'
+  loop: "{{ switch_list }}"
+  loop_control:
+    loop_var: switch
+
+- name: Copy spine_bgp.sh.j2 script based on switch_list
+  ansible.builtin.template:
+    src: spine_bgp.conf.j2
+    dest: /var/www/html/{{ switch.name }}_bgp.sh
+    owner: root
+    group: root
+    mode: '0755'
+  when: switch.asn == "65000"
+  loop: "{{ switch_list }}"
+  loop_control:
+    loop_var: switch
+
+- name: Copy leaf_bgp.sh.j2 script based on switch_list
+  ansible.builtin.template:
+    src: leaf_bgp.conf.j2
+    dest: /var/www/html/{{ switch.name }}_bgp.sh
+    owner: root
+    group: root
+    mode: '0755'
+  when: switch.asn == "65001"
+  loop: "{{ switch_list }}"
+  loop_control:
+    loop_var: switch

@@ -1,0 +1,7 @@
+---
+# Install DHCPD on Ubuntu
+- name: Install DHCPD on Ubuntu
+  ansible.builtin.apt:
+    name: isc-dhcp-server
+    state: present
+    update_cache: true

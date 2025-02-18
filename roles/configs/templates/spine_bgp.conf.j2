@@ -1,0 +1,49 @@
+!
+! Zebra configuration saved from vty
+!   2025/02/06 13:19:26
+!
+frr version 10.0.1
+frr defaults traditional
+!
+hostname {{ switch.host_name }}
+password zebra
+enable password zebra
+log syslog informational
+log facility local4
+!
+!
+!
+!
+router bgp 65000
+ bgp router-id {{ switch.lo0_ip_address }}
+ no bgp ebgp-requires-policy
+ bgp bestpath as-path multipath-relax
+ neighbor LEAF peer-group
+ neighbor LEAF remote-as external
+ neighbor LEAF bfd
+ neighbor LEAF advertisement-interval 5
+ neighbor LEAF timers 3 9
+ neighbor LEAF capability extended-nexthop
+ neighbor Ethernet0 interface peer-group LEAF
+ neighbor Ethernet4 interface peer-group LEAF
+ !
+ address-family ipv4 unicast
+  redistribute connected
+  maximum-paths 2
+ exit-address-family
+ !
+ address-family l2vpn evpn
+  neighbor LEAF activate
+ exit-address-family
+!
+exit
+!
+!
+!
+route-map RM_SET_SRC permit 10
+exit
+!
+!
+agentx
+!
+!

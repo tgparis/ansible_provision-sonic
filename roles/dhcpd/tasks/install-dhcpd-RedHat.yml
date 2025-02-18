@@ -1,0 +1,8 @@
+---
+# Install DHCPD on RedHat
+- name: Install DHCPD on RedHat
+  ansible.builtin.dnf:
+    name: dhcp
+    state: present
+    update_cache: true
+    

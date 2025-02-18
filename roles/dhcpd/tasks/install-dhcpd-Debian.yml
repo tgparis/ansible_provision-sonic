@@ -1,0 +1,7 @@
+---
+# Install DHCPD on Debian
+- name: Install DHCPD on Debian
+  ansible.builtin.apt:
+    name: isc-dhcp-server
+    state: present
+    update_cache: true

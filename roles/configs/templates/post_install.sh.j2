@@ -1,0 +1,12 @@
+#!/bin/bash
+# SONiC ZTP Script
+# Author: Trent Paris
+
+# Log output
+exec > /var/log/ztp.log 2>&1
+
+# Download the BGP configuration
+sudo curl -o /etc/sonic/frr/bgpd.conf "http://{{ server_ip }}/{{ switch.name }}_bgp.conf"
+
+# Restart BGP container to apply configuration
+sudo docker restart bgp

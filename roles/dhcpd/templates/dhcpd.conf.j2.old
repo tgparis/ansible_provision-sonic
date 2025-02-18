@@ -1,0 +1,42 @@
+subnet {{ oob_net }} netmask 255.255.255.0 {
+    range {{ oob_net_range }};
+    option routers {{ oob_gateway }};
+    option domain-name-servers {{ oob_dns }};
+
+    # Specify the ZTP script and Sonic OS image
+    host mie-phxdc-ss01-ztp {
+        hardware ethernet {{ mac_address_ss01 }};  # Replace with your switch MAC
+        fixed-address {{ ip_ss01 }};  # Replace with your switch IP
+        option host-name "mie-phxdc-ss01";
+        next-server {{ server_ip }};  # Your Ubuntu server IP
+        option default-url "http://{{ server_ip }}/onie-installer";
+        option bootfile-name "http://{{ server_ip }}/initial.json";
+    }
+    # Specify the ZTP script and Sonic OS image
+    host mie-phxdc-ss02-ztp {
+        hardware ethernet {{ mac_address_ss02 }};  # Replace with your switch MAC
+        fixed-address {{ ip_ss01 }};  # Replace with your switch IP
+        option host-name "mie-phxdc-ss02;
+        next-server {{ server_ip }};  # Your Ubuntu server IP
+        option default-url "http://{{ server_ip }}/onie-installer";
+        option bootfile-name "http://{{ server_ip }}/initial.json";
+    }
+    # Specify the ZTP script and Sonic OS image
+    host mie-phxdc-ls301-ztp {
+        hardware ethernet {{ mac_address_ls301 }};  # Replace with your switch MAC
+        fixed-address {{ ip_ls301 }};  # Replace with your switch IP
+        option host-name "mie-phxdc-ls301";
+        next-server {{ server_ip }};  # Your Ubuntu server IP
+        option default-url "http://{{ server_ip }}/onie-installer";
+        option bootfile-name "http://{{ server_ip }}/initial.json";
+    }
+    # Specify the ZTP script and Sonic OS image
+    host mie-phxdc-ls302-ztp {
+        hardware ethernet {{ mac_address_ls302 }};  # Replace with your switch MAC
+        fixed-address {{ ip_ls302 }};  # Replace with your switch IP
+        option host-name "mie-phxdc-ls302";
+        next-server {{ server_ip }};  # Your Ubuntu server IP
+        option default-url "http://{{ server_ip }}/onie-installer";
+        option bootfile-name "http://{{ server_ip }}/initial.json";
+    }
+}

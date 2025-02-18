@@ -1,0 +1,17 @@
+subnet {{ oob_net }} netmask {{ oob_netmask }} {
+    range {{ oob_net_range }};
+    option routers {{ oob_gateway }};
+    option domain-name-servers {{ oob_dns }};
+
+    {% for switch in switch_list %}
+    # ZTP configuration for {{ switch.name }}
+    host {{ switch.name }} {
+        hardware ethernet {{ switch.mac_address }};
+        fixed-address {{ switch.eth0_ip_address }};
+        option host-name "{{ switch.host_name }}";
+        next-server {{ server_ip }};
+        option default-url "http://{{ server_ip }}/onie-installer";
+        option bootfile-name "http://{{ server_ip }}/initial.json";
+    }
+    {% endfor %}
+}

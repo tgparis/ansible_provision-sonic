@@ -1,0 +1,31 @@
+{
+  "ztp": {
+    "01-firmware":{
+      "install": {
+        "url": "http://{{ server_ip }}:80/sonic-broadcom.bin"
+      }
+    },
+    "02-configdb-json" : {
+      "dynamic-url": {
+        "source": {
+          "prefix": "http://{{ server_ip }}:80/",
+          "identifier": "hostname",
+          "suffix": "_config_db.json"
+        },
+        "destination": "/etc/sonic/config_db.json"
+      }
+    },
+    "03-provisioning-script": {
+      "plugin": {
+        "dynamic-url": {
+          "source": {
+            "prefix": "http://{{ server_ip }}/",
+            "identifier": "hostname",
+            "suffix": "_post_install.sh"
+          }
+        }
+      },
+      "reboot-on-success": true
+    }
+  }
+}

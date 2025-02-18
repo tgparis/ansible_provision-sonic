@@ -1,0 +1,7 @@
+---
+#Install HTTPD on RedHat
+- name: Install HTTPD on RedHat
+  ansible.builtin.dnf:
+    name: httpd
+    state: present
+    update_cache: true
